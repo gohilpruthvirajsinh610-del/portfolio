@@ -10,7 +10,11 @@ const app = express();
 
 connectDB();
 
-app.use(cors());
+app.use(cors({
+    origin: "https://gohilpruthvirajsinh610-del.github.io",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use(express.json());
 app.use("/api/contact", contactRoutes);
 app.get("/", (req, res) => {

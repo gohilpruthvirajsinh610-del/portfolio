@@ -1,37 +1,28 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sendContactEmail = async ({
-  name,
-  email,
-  subject,
-  message,
-}) => {
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_USER,
+    name,
+    email,
+    subject,
+    message,
+  }) => {
+    const { data, error } = await resend.emails.send({
+      from: "Portfolio <onboarding@resend.dev>",
+      to: [process.env.EMAIL_USER],
+      replyTo: email,
+      subject: `Portfolio Contact: ${subject}`,
 
-    replyTo: email,
+      text: `
+  New message received through your portfolio.
 
-    subject: `Portfolio Contact: ${subject}`,
+  Name: ${name}
+  Email: ${email}
+  Subject: ${subject}
 
-    text: `
-New message received through your portfolio.
-
-Name: ${name}
-Email: ${email}
-Subject: ${subject}
-
-Message:
-${message}
+  Message:
+  ${message}
     `,
 
     html: `
@@ -52,12 +43,15 @@ ${message}
         You can reply directly to this email to contact ${name}.
       </p>
     `,
-  };
+  });
 
-  const info = await transporter.sendMail(mailOptions);
+  if (error) {
+    console.error("Resend email error:", error);
+    throw new Error(error.message || "Failed to send email.");
+  }
 
   console.log("Email sent successfully!");
-  console.log("Message ID:", info.messageId);
+  console.log("Message ID:", data?.id);
 };
 
 module.exports = sendContactEmail;

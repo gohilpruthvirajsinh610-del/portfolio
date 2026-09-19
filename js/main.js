@@ -305,7 +305,7 @@ function initContactForm() {
     button.textContent = "Sending...";
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch("https://portfolio-atxl.onrender.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

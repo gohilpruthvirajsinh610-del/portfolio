@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.*
+
+# Build files
+dist/
+build/
+
+# Backend dependencies
+server/node_modules/
+server/.env
+
+# Backup/archive files
+*.zip

@@ -194,6 +194,167 @@ button {
   }
 }
 
+/* =========================================================
+   RESPONSIVE LAYOUT SAFEGUARDS
+   Covers compact phones through large desktop displays.
+   ========================================================= */
+
+/* Keep flex and grid children from forcing horizontal scrolling. */
+.nav-inner > *,
+.about-grid > *,
+.contact-grid > *,
+.project-card,
+.repo-card,
+.contact-item,
+.terminal-body {
+  min-width: 0;
+}
+
+/* Comfortable measure on very wide monitors while retaining fluid gutters. */
+@media (min-width: 1440px) {
+  :root {
+    --container: 1240px;
+  }
+
+  .section {
+    padding: 6rem 0;
+  }
+}
+
+/* Switch navigation before its links can crowd the logo and theme control. */
+@media (max-width: 820px) {
+  html {
+    scroll-padding-top: 60px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .mobile-nav {
+    max-height: calc(100dvh - 60px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .about-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-grid {
+    gap: 2.25rem;
+  }
+
+  .contact-grid {
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    min-height: 100svh;
+  }
+
+  .github-placeholder {
+    padding: 1.5rem;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 0.875rem;
+    padding-right: 0.875rem;
+  }
+
+  .nav-actions {
+    gap: 0.25rem;
+  }
+
+  .mobile-nav {
+    padding: 0.75rem;
+  }
+
+  .hero-content {
+    width: 100%;
+  }
+
+  .hero-role {
+    font-size: clamp(1rem, 5.5vw, 1.2rem);
+  }
+
+  .terminal {
+    font-size: 0.78rem;
+  }
+
+  .terminal-body {
+    padding: 1rem;
+    min-height: 0;
+  }
+
+  .terminal-output {
+    padding-left: 0.5rem;
+  }
+
+  .project-body,
+  .contact-form,
+  .github-placeholder {
+    padding: 1.125rem;
+  }
+
+  .contact-item {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    row-gap: 0.4rem;
+  }
+
+  .contact-item span {
+    flex: 1 1 calc(100% - 2rem);
+  }
+
+  .copy-btn {
+    margin-left: 1.9rem;
+  }
+
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .repo-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 340px) {
+  html {
+    font-size: 15px;
+  }
+
+  .logo {
+    font-size: 1rem;
+  }
+
+  .theme-toggle,
+  .menu-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .filter-btn {
+    padding: 0.45rem 0.75rem;
+  }
+}
+
 /* Utility */
 .container {
   width: 100%;
@@ -2105,5 +2266,25 @@ textarea {
   .back-to-top:hover,
   .back-to-top.visible:hover {
     transform: none !important;
+  }
+}
+
+/* Final cascade for compact viewports. */
+@media (max-width: 700px) {
+  .hero {
+    min-height: 100svh;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 0.875rem;
+    padding-right: 0.875rem;
+  }
+
+  .project-body,
+  .contact-form,
+  .github-placeholder {
+    padding: 1.125rem;
   }
 }

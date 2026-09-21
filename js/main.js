@@ -60,6 +60,7 @@ function initMobileNav() {
     const isOpen = mobileNav.classList.toggle("open");
 
     menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
   });
 
   const mobileLinks = mobileNav.querySelectorAll("a");
@@ -68,8 +69,19 @@ function initMobileNav() {
     link.addEventListener("click", () => {
       mobileNav.classList.remove("open");
       menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open menu");
     });
   });
+
+  const closeMenuOnDesktop = () => {
+    if (window.innerWidth > 820 && mobileNav.classList.contains("open")) {
+      mobileNav.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open menu");
+    }
+  };
+
+  window.addEventListener("resize", closeMenuOnDesktop, { passive: true });
 }
 
 /* =========================================

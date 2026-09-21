@@ -20,7 +20,7 @@ const CONFIG = {
 
   role: "BCA Graduate | Web Developer | IT Enthusiast",
 
-  email: "your.email@example.com",
+  email: "gohilpruthvirajsinh610@gmail.com",
 
   heroIntro:
     "I enjoy building practical digital experiences, exploring modern technologies, and turning ideas into real-world projects.",
@@ -67,16 +67,16 @@ const CONFIG = {
   // URLs when your accounts are ready.
 
   social: {
-    github: "#",
-    linkedin: "#",
-    instagram: "#",
+    github: "https://github.com/gohilpruthvirajsinh610-del",
+    linkedin: "https://www.linkedin.com/in/pruthvirajsinh-gohil-547a07276?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    instagram: "https://www.instagram.com/pruthvirajsinh_3110?stkn=ZHd4ZThsdjBmOW9h",
   },
 
   // GitHub username
   // Leave empty until your GitHub account
   // and profile are ready.
 
-  githubUsername: "",
+  githubUsername: "gohilpruthvirajsinh610-del",
 
   // ========================================
   // RESUME

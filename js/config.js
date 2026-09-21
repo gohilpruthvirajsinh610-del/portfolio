@@ -156,9 +156,9 @@ const CONFIG = {
       "Node.js and Express.js REST API integration",
       ],
 
-      github: "#",
+      github: "https://github.com/gohilpruthvirajsinh610-del/portfolio.git",
 
-      live: "#",
+      live: "https://portfolio-seven-ashen-ii8hl87wjh.vercel.app",
 
       category: "web",
 

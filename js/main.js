@@ -675,20 +675,30 @@ async function initGitHub() {
     profileButton.href = `https://github.com/${username}`;
   }
 
+  if (!repoContainer) {
+    console.warn("GitHub repository container not found.");
+    return;
+  }
+
   try {
     const [profileResponse, reposResponse] = await Promise.all([
       fetch(`https://api.github.com/users/${username}`),
+
       fetch(
         `https://api.github.com/users/${username}/repos?sort=updated&per_page=6`
       ),
     ]);
 
     if (!profileResponse.ok) {
-      throw new Error("GitHub profile could not be loaded.");
+      throw new Error(
+        `GitHub profile could not be loaded (${profileResponse.status}).`
+      );
     }
 
     if (!reposResponse.ok) {
-      throw new Error("GitHub repositories could not be loaded.");
+      throw new Error(
+        `GitHub repositories could not be loaded (${reposResponse.status}).`
+      );
     }
 
     const profile = await profileResponse.json();
@@ -700,13 +710,11 @@ async function initGitHub() {
   } catch (error) {
     console.error("GitHub API Error:", error);
 
-    if (repoContainer) {
-      repoContainer.innerHTML = `
-        <p class="github-error">
-          Unable to load GitHub data right now.
-        </p>
-      `;
-    }
+    repoContainer.innerHTML = `
+      <p class="github-error">
+        Unable to load GitHub repositories right now.
+      </p>
+    `;
   }
 }
 
@@ -719,35 +727,41 @@ function updateGitHubStats(profile, repos) {
   if (!stats.length) return;
 
   const totalStars = repos.reduce(
-    (total, repo) => total + repo.stargazers_count,
+    (total, repo) => total + (repo.stargazers_count || 0),
     0
   );
 
-  // Repositories
-  const repositoriesValue = stats[0]?.querySelector(".stat-value");
+  /* Repositories */
+  const repositoriesValue =
+    stats[0]?.querySelector(".stat-value");
 
   if (repositoriesValue) {
-    repositoriesValue.textContent = profile.public_repos;
+    repositoriesValue.textContent = profile.public_repos ?? 0;
   }
 
-  // Stars
-  const starsValue = stats[1]?.querySelector(".stat-value");
+
+  /* Stars */
+  const starsValue =
+    stats[1]?.querySelector(".stat-value");
 
   if (starsValue) {
     starsValue.textContent = totalStars;
   }
 
-  const starsLabel = stats[1]?.querySelector(".stat-label");
+  const starsLabel =
+    stats[1]?.querySelector(".stat-label");
 
   if (starsLabel) {
     starsLabel.textContent = "Stars";
   }
 
-  // Followers
-  const followersValue = stats[2]?.querySelector(".stat-value");
+
+  /* Followers */
+  const followersValue =
+    stats[2]?.querySelector(".stat-value");
 
   if (followersValue) {
-    followersValue.textContent = profile.followers;
+    followersValue.textContent = profile.followers ?? 0;
   }
 }
 
@@ -757,7 +771,7 @@ function renderGitHubRepositories(repos) {
 
   if (!container) return;
 
-  if (!repos.length) {
+  if (!Array.isArray(repos) || repos.length === 0) {
     container.innerHTML = `
       <p class="github-empty">
         No public repositories found.
@@ -770,21 +784,13 @@ function renderGitHubRepositories(repos) {
   container.innerHTML = repos
     .map(
       (repo) => `
-        <article class="repo-card reveal">
+        <article class="repo-card">
 
-          <div class="repo-card-header">
-            <h3 class="repo-title">
-              ${escapeGitHubHTML(repo.name)}
-            </h3>
+          <h3 class="repo-name">
+            ${escapeGitHubHTML(repo.name)}
+          </h3>
 
-            ${
-              repo.fork
-                ? `<span class="repo-badge">Fork</span>`
-                : ""
-            }
-          </div>
-
-          <p class="repo-description">
+          <p class="repo-desc">
             ${escapeGitHubHTML(
               repo.description || "No description available."
             )}
@@ -793,15 +799,17 @@ function renderGitHubRepositories(repos) {
           <div class="repo-meta">
 
             <span>
-              ${escapeGitHubHTML(repo.language || "Other")}
+              ${escapeGitHubHTML(
+                repo.language || "Other"
+              )}
             </span>
 
             <span>
-              ★ ${repo.stargazers_count}
+              ★ ${repo.stargazers_count || 0}
             </span>
 
             <span>
-              Forks ${repo.forks_count}
+              Forks ${repo.forks_count || 0}
             </span>
 
           </div>
@@ -811,6 +819,9 @@ function renderGitHubRepositories(repos) {
             class="btn btn-secondary repo-link"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="View ${escapeGitHubHTML(
+              repo.name
+            )} repository"
           >
             View Repository
           </a>

@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // projects, and journey are generated dynamically.
   renderDynamicContent();
 
+  // Load GitHub data.
+  initGitHub();
+
   // Initialize interactions after dynamic elements exist.
   initReveal();
   initProjectFilters();
@@ -647,6 +650,181 @@ function updateSocialLinks() {
 
     element.style.display = "";
   });
+}
+
+/* =========================================
+   GITHUB
+========================================= */
+
+async function initGitHub() {
+  const username = CONFIG.githubUsername;
+
+  if (!username || username === "#") {
+    console.warn("GitHub username is not configured.");
+    return;
+  }
+
+  const profileButton = document.getElementById("github-profile-btn");
+  const repoContainer = document.getElementById("repo-cards");
+
+  if (profileButton) {
+    profileButton.href = `https://github.com/${username}`;
+  }
+
+  try {
+    const [profileResponse, reposResponse] = await Promise.all([
+      fetch(`https://api.github.com/users/${username}`),
+      fetch(
+        `https://api.github.com/users/${username}/repos?sort=updated&per_page=6`
+      ),
+    ]);
+
+    if (!profileResponse.ok) {
+      throw new Error("GitHub profile could not be loaded.");
+    }
+
+    if (!reposResponse.ok) {
+      throw new Error("GitHub repositories could not be loaded.");
+    }
+
+    const profile = await profileResponse.json();
+    const repos = await reposResponse.json();
+
+    updateGitHubStats(profile, repos);
+    renderGitHubRepositories(repos);
+
+  } catch (error) {
+    console.error("GitHub API Error:", error);
+
+    if (repoContainer) {
+      repoContainer.innerHTML = `
+        <p class="github-error">
+          Unable to load GitHub data right now.
+        </p>
+      `;
+    }
+  }
+}
+
+
+function updateGitHubStats(profile, repos) {
+  const stats = document.querySelectorAll(
+    "#github .stats-row .stat-item"
+  );
+
+  if (!stats.length) return;
+
+  const totalStars = repos.reduce(
+    (total, repo) => total + repo.stargazers_count,
+    0
+  );
+
+  // Repositories
+  const repositoriesValue = stats[0]?.querySelector(".stat-value");
+
+  if (repositoriesValue) {
+    repositoriesValue.textContent = profile.public_repos;
+  }
+
+  // Stars
+  const starsValue = stats[1]?.querySelector(".stat-value");
+
+  if (starsValue) {
+    starsValue.textContent = totalStars;
+  }
+
+  const starsLabel = stats[1]?.querySelector(".stat-label");
+
+  if (starsLabel) {
+    starsLabel.textContent = "Stars";
+  }
+
+  // Followers
+  const followersValue = stats[2]?.querySelector(".stat-value");
+
+  if (followersValue) {
+    followersValue.textContent = profile.followers;
+  }
+}
+
+
+function renderGitHubRepositories(repos) {
+  const container = document.getElementById("repo-cards");
+
+  if (!container) return;
+
+  if (!repos.length) {
+    container.innerHTML = `
+      <p class="github-empty">
+        No public repositories found.
+      </p>
+    `;
+
+    return;
+  }
+
+  container.innerHTML = repos
+    .map(
+      (repo) => `
+        <article class="repo-card reveal">
+
+          <div class="repo-card-header">
+            <h3 class="repo-title">
+              ${escapeGitHubHTML(repo.name)}
+            </h3>
+
+            ${
+              repo.fork
+                ? `<span class="repo-badge">Fork</span>`
+                : ""
+            }
+          </div>
+
+          <p class="repo-description">
+            ${escapeGitHubHTML(
+              repo.description || "No description available."
+            )}
+          </p>
+
+          <div class="repo-meta">
+
+            <span>
+              ${escapeGitHubHTML(repo.language || "Other")}
+            </span>
+
+            <span>
+              ★ ${repo.stargazers_count}
+            </span>
+
+            <span>
+              Forks ${repo.forks_count}
+            </span>
+
+          </div>
+
+          <a
+            href="${repo.html_url}"
+            class="btn btn-secondary repo-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Repository
+          </a>
+
+        </article>
+      `
+    )
+    .join("");
+}
+
+
+function escapeGitHubHTML(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 /* =========================================

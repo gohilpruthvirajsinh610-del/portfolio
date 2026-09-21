@@ -192,9 +192,9 @@ const CONFIG = {
       "Admin dashboard with product, customer, and order management",
       ],
 
-      github: "#",
+      github: "https://github.com/gohilpruthvirajsinh610-del/boozehub.git",
 
-      live: "#",
+      live: "https://boozehub.freedev.app",
 
       category: "web",
 

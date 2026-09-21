@@ -16,7 +16,7 @@
       content="BCA graduate interested in software development, web development, and programming. Building practical projects and continuously learning."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://your-portfolio-url.com" />
+    <meta property="og:url" content="https://portfolio-seven-ashen-ii8hl87wjh.vercel.app/" />
     <!-- <meta property="og:image" content="https://your-portfolio-url.com/assets/og-image.png" /> -->
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -36,50 +36,95 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <!-- ========== NAVBAR ========== -->
-    <header class="navbar" role="banner">
-      <div class="container nav-inner">
-        <a href="#home" class="logo" aria-label="Home">Gohil<span>.</span></a>
 
-        <nav class="nav-links" aria-label="Main navigation">
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#journey">Journey</a>
-          <a href="#github">GitHub</a>
-          <a href="#contact">Contact</a>
-        </nav>
+  <!-- ========== NAVBAR ========== -->
+  <header class="navbar" role="banner">
+    <div class="container nav-inner">
 
-        <div class="nav-actions">
-          <button
-            class="theme-toggle"
-            id="theme-toggle"
-            aria-label="Toggle dark/light theme"
-            title="Toggle theme"
+      <a href="#home" class="logo" aria-label="Home">
+        Gohil<span>.</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#journey">Journey</a>
+        <a href="#github">GitHub</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+
+        <!-- Theme Toggle -->
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="Toggle dark/light theme"
+          title="Toggle theme"
+        >
+          <svg
+            class="icon-moon"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
           >
-            <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-            </svg>
-            <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="5" />
-              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-            </svg>
-          </button>
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
 
-          <button
-            class="menu-toggle"
-            id="menu-toggle"
-            aria-label="Open menu"
-            aria-expanded="false"
-            aria-controls="mobile-nav"
+          <svg
+            class="icon-sun"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 12h18M3 6h18M3 18h18" />
-            </svg>
-          </button>
-        </div>
+            <circle cx="12" cy="12" r="5" />
+            <path
+              d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+            />
+          </svg>
+        </button>
+
+        <!-- Mobile Menu -->
+        <button
+          class="menu-toggle"
+          id="menu-toggle"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          title="Open menu"
+        >
+          <svg
+            class="menu-icon"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M4 6h16" />
+            <path d="M4 12h16" />
+            <path d="M4 18h16" />
+          </svg>
+        </button>
+
       </div>
-    </header>
+    </div>
+  </header>
 
     <!-- Mobile Navigation -->
     <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">

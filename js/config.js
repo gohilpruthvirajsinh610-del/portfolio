@@ -76,7 +76,7 @@ const CONFIG = {
   // Leave empty until your GitHub account
   // and profile are ready.
 
-  githubUsername: "gohilpruthvirajsinh610-del",
+  githubUsername: "https://github.com/gohilpruthvirajsinh610-del",
 
   // ========================================
   // RESUME

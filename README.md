@@ -1,228 +1,215 @@
-# Gohil — Personal Developer Portfolio
+# Gohil Pruthvirajsinh — Developer Portfolio
 
-A clean, modern, responsive personal portfolio website built with plain HTML, CSS, and JavaScript. Designed to feel like a real developer portfolio — not a generic template.
+A modern, responsive personal portfolio website showcasing my projects, technical skills, development journey, and experience as a web developer and aspiring AI/ML engineer.
 
-**No build step required.** Just edit the config and deploy.
+The portfolio is designed to provide a central place to explore my work, technical background, GitHub activity, and ways to get in touch with me.
 
----
+## Overview
 
-## Quick Start
+This portfolio combines a clean, responsive frontend with dynamic content and backend functionality.
 
-1. Open the `portfolio` folder.
-2. Edit `js/config.js` with your real information.
-3. Drop your resume into `assets/resume.pdf`.
-4. Open `index.html` in a browser (or use a local server).
+It includes sections for:
+
+* About Me
+* Technical Skills
+* Projects
+* Development Journey
+* GitHub Activity
+* Contact
+
+The website is built with a focus on responsive design, clean UI, accessibility, reusable components, and practical JavaScript functionality.
+
+## Features
+
+* Responsive design for desktop, tablet, and mobile
+* Light and dark theme support
+* Mobile navigation with responsive hamburger menu
+* Dynamic skills and project rendering
+* Project filtering
+* GitHub profile and repository integration
+* Dynamic GitHub repository cards
+* GitHub statistics
+* Interactive contact form
+* Backend-powered contact form submission
+* Smooth scrolling navigation
+* Active navigation highlighting
+* Scroll reveal animations
+* Copy-to-clipboard email functionality
+* Back-to-top button
+* Interactive terminal section
+* Responsive UI across different screen sizes
+
+## Technologies
+
+### Frontend
+
+* HTML5
+* CSS3
+* JavaScript
+* Bootstrap
+* Tailwind CSS
+* jQuery
+
+### Backend
+
+* Node.js
+* Express.js
+* Nodemailer
+
+### Database
+
+* MongoDB
+
+### Tools & Services
+
+* Git
+* GitHub
+* VS Code
+* Vercel
+
+## Project Structure
+
+```text
+portfolio/
+│
+├── assets/
+│   ├── images/
+│   └── ...
+│
+├── css/
+│   └── style.css
+│
+├── js/
+│   ├── config.js
+│   └── main.js
+│
+├── index.html
+├── README.md
+└── ...
+```
+
+> The exact structure may vary as the project continues to evolve.
+
+## Dynamic Functionality
+
+The portfolio is not limited to static frontend content.
+
+### GitHub Integration
+
+The website connects to the GitHub API to dynamically display:
+
+* Public repository count
+* Followers
+* Repository stars
+* Recently updated repositories
+* Repository descriptions
+* Repository languages
+* Repository links
+
+This allows the GitHub section of the portfolio to stay updated without manually editing the website whenever a repository changes.
+
+### Contact Form
+
+The contact form uses a Node.js and Express backend to process messages.
+
+Nodemailer is used for email delivery, while environment variables are used to keep sensitive configuration values outside the source code.
+
+## Design
+
+The portfolio follows a modern developer-focused design with:
+
+* Minimal interface
+* Responsive layouts
+* Dark and light themes
+* Consistent typography
+* Interactive cards
+* Subtle animations
+* Mobile-first considerations
+
+The goal is to keep the interface professional while still showing personality and technical ability.
+
+## Featured Projects
+
+Some of the projects showcased in the portfolio include:
+
+### BoozeHub
+
+A PHP and MySQL based e-commerce web application featuring authentication, product management, shopping cart functionality, checkout, order processing, inventory management, and an admin dashboard.
+
+### DairyPro
+
+A dairy management system developed using PHP and MySQL for managing dairy-related operations and data.
+
+### Portfolio Website
+
+This portfolio itself, featuring dynamic content, GitHub integration, a backend-powered contact form, and responsive frontend interactions.
+
+## Getting Started
+
+### 1. Clone the repository
 
 ```bash
-# Optional: simple local server
-npx serve .
-# or
-python -m http.server 8000
+git clone https://github.com/gohilpruthvirajsinh610-del/portfolio.git
 ```
 
----
+### 2. Open the project
 
-## Folder Structure
+Open the project folder in VS Code.
 
-```
-portfolio/
-├── index.html              # Main page
-├── css/
-│   └── style.css           # All styles + theme variables
-├── js/
-│   ├── config.js           # ← EDIT THIS (personal data, skills, projects…)
-│   └── main.js             # Interactions (theme, filters, animations…)
-├── assets/
-│   ├── images/             # Project images / placeholders
-│   ├── resume.pdf          # Your resume (add this)
-│   └── favicon.svg
-└── README.md
-```
+### 3. Configure the application
 
----
+Update the configuration values in the project's configuration file and add the required environment variables for backend functionality.
 
-## Customization Guide
+Do not commit sensitive credentials or `.env` files to GitHub.
 
-### 1. Personal Information & Social Links
+### 4. Run the frontend
 
-Open **`js/config.js`** and update:
+The frontend can be opened using a local development server such as VS Code Live Server.
 
-```js
-name: "Gohil",
-role: "Aspiring Software Developer",
-email: "your.email@example.com",   // ← real email
+If the backend is required, install the server dependencies and start the Node.js application.
 
-social: {
-  github: "https://github.com/yourusername",
-  linkedin: "https://linkedin.com/in/yourusername",
-  instagram: "https://instagram.com/yourusername",
-},
+## Environment Variables
 
-githubUsername: "yourusername",
+Sensitive configuration values should be stored in environment variables rather than committed to the repository.
+
+Example:
+
+```env
+EMAIL_USER=your-email@example.com
+EMAIL_PASS=your-app-password
 ```
 
-All social icons and the GitHub button read from this object.
-
-### 2. About Text & “Currently Exploring”
-
-Still in `config.js`:
-
-```js
-about: { ... },
-currentlyExploring: ["Python", "Web Development", ...],
-```
-
-The About section text is also duplicated in `index.html` for SEO/readability. You can keep them in sync or make the About section fully dynamic later.
-
-### 3. Skills
-
-```js
-skills: {
-  programming: ["Python", "JavaScript", "HTML", "CSS"],
-  web: ["Frontend development", "Responsive design", "REST APIs"],
-  tools: ["Git", "GitHub", "VS Code"],
-},
-```
-
-Add or remove items freely. They are rendered as tags — no proficiency claims.
-
-### 4. Projects (Most Important)
-
-Replace the three placeholder projects with your real ones:
-
-```js
-projects: [
-  {
-    id: 1,
-    title: "My Real Project",
-    description: "Short, honest description of what it does.",
-    image: "assets/images/my-project.png",   // add your screenshot
-    technologies: ["Python", "Flask", ...],
-    features: [
-      "Feature one",
-      "Feature two",
-    ],
-    github: "https://github.com/you/repo",
-    live: "https://your-live-demo.com",      // or "#" if none
-    category: "python",   // "python" | "web" | "other"
-    isPlaceholder: false, // set to false for real projects
-  },
-  // ...
-],
-```
-
-**Tips:**
-- Use real screenshots (1200×750 or similar).
-- Keep descriptions concise and honest.
-- The filter buttons (`All | Python | Web | Other`) use the `category` field.
-
-### 5. Journey / Timeline
-
-Edit the `journey` array in `config.js`. Each item has `title` and `description`.
-
-### 6. Resume
-
-1. Export your resume as PDF.
-2. Place it at: `assets/resume.pdf`
-3. The “Download Resume” button already points there.
-
-### 7. Favicon & Meta
-
-- Favicon: replace `assets/favicon.svg` (or add a `.ico`).
-- Update the `<title>`, meta description, and Open Graph tags in `index.html` once you have a live URL.
-
----
-
-## Connecting the Contact Form
-
-The form is currently frontend-only (it shows a helpful alert).
-
-### Option A — Formspree (easiest)
-
-1. Go to [formspree.io](https://formspree.io) and create a form.
-2. In `index.html`, change the form tag to:
-
-```html
-<form class="contact-form reveal" id="contact-form"
-      action="https://formspree.io/f/YOUR_FORM_ID"
-      method="POST">
-```
-
-3. Remove or simplify the JavaScript submit handler in `main.js` if you want pure Formspree behavior.
-
-### Option B — EmailJS
-
-Follow their docs to add the SDK and send emails from the client.
-
----
-
-## Theme
-
-Dark theme is the default. Users can toggle light/dark mode (preference is saved in `localStorage`).
-
-CSS variables live at the top of `css/style.css`. Change `--accent` if you want a different brand color.
-
----
+Do not expose real credentials in the repository.
 
 ## Deployment
 
-### GitHub Pages
+The portfolio frontend and backend can be deployed separately depending on the hosting environment.
 
-1. Create a new repository (e.g. `yourusername.github.io` or `portfolio`).
-2. Push the contents of the `portfolio` folder.
-3. In repo Settings → Pages → set source to the main branch (or `/docs` if you put files there).
-4. Your site will be live at `https://yourusername.github.io` (or `/portfolio`).
+The project is structured so that the frontend can be hosted as a static website while the Node.js backend handles dynamic contact-form functionality.
 
-### Netlify / Vercel
+## What This Project Demonstrates
 
-1. Drag & drop the `portfolio` folder, **or**
-2. Connect the GitHub repo.
-3. No build command needed — publish directory is the root of the folder.
+This portfolio demonstrates practical experience with:
 
-### Other static hosts
+* Responsive web development
+* Frontend UI development
+* JavaScript DOM manipulation
+* API integration
+* Backend development with Node.js
+* Express.js
+* MongoDB
+* Email integration
+* Git and GitHub
+* Deployment and hosting
+* Responsive design
+* Web accessibility
+* Project organization
 
-Any static host works (Cloudflare Pages, Render, Surge, etc.).
+## Author
 
----
+**Gohil Pruthvirajsinh**
 
-## Accessibility & Performance Notes
+BCA Graduate
+Web Developer | Aspiring AI/ML Engineer
 
-- Semantic HTML landmarks and heading hierarchy
-- Keyboard-navigable interactive elements
-- Focus styles and ARIA labels on buttons/menus
-- Respects `prefers-reduced-motion`
-- Lazy-loaded project images
-- Minimal JS, no heavy frameworks
-
----
-
-## What’s Intentionally Left as Placeholders
-
-- Project cards (clearly marked)
-- GitHub contribution grid & stats (not real data)
-- Social links (`#` until you fill them)
-- Resume file (you must add `assets/resume.pdf`)
-- Contact form backend
-
-This keeps the portfolio honest and recruiter-friendly.
-
----
-
-## Making It Yours
-
-Small personal touches already included:
-- Terminal-style intro in the About section
-- “Currently exploring…” tags
-- Clean timeline instead of fake work experience
-- Subtle hover and scroll animations
-
-Feel free to tweak colors, spacing, or add a small easter egg — just keep it professional enough to send to recruiters.
-
----
-
-## License
-
-You can use this portfolio structure freely for your personal site. Attribution is appreciated but not required.
-
-Happy building!  
-— Gohil’s starter portfolio
+GitHub: [gohilpruthvirajsinh610-del](https://github.com/gohilpruthvirajsinh610-del)

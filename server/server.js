@@ -11,7 +11,7 @@ const app = express();
 connectDB();
 
 app.use(cors({
-    origin: "https://gohilpruthvirajsinh610-del.github.io",
+    origin: "https://portfolio-seven-ashen-ii8hl87wjh.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }));

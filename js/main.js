@@ -305,56 +305,56 @@ function initContactForm() {
     button.textContent = "Sending...";
 
     try {
-        fetch("https://portfolio-api-xi-topaz.vercel.app/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          subject,
-          message,
-        }),
-      });
+      const response = await fetch(
+        "https://portfolio-api-xi-topaz.vercel.app/api/contact",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name,
+                email,
+                subject,
+                message,
+            }),
+        }
+      );
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(
-          data.message || "Failed to send your message."
-        );
+          throw new Error(
+              data.message || "Failed to send your message."
+          );
       }
 
       // Success
       button.textContent = "Message Sent ✓";
 
       alert(
-        data.message || "Your message has been sent successfully!"
+          data.message || "Your message has been sent successfully!"
       );
 
-      // Clear form
       form.reset();
 
     } catch (error) {
-      console.error("Contact form error:", error);
+        console.error("Contact form error:", error);
 
-      button.textContent = "Try Again";
+        button.textContent = "Try Again";
 
-      alert(
-        error.message ||
-        "Something went wrong. Please try again later."
-      );
-
-    } finally {
-      // Restore button after a short delay
-      setTimeout(() => {
-        button.disabled = false;
-        button.textContent = originalText;
-      }, 2500);
-    }
-  });
-}
+        alert(
+            error.message ||
+            "Something went wrong. Please try again later."
+        );
+      } finally {
+        setTimeout(() => {
+            button.disabled = false;
+            button.textContent = originalText;
+        }, 2500);
+      }
+    });
+  }
 
 /* =========================================
    DYNAMIC CONTENT

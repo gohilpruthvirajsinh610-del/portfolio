@@ -56,6 +56,7 @@ function initTheme() {
 function initMobileNav() {
   const menuToggle = document.getElementById("menu-toggle");
   const mobileNav = document.getElementById("mobile-nav");
+  const mobileNavBreakpoint = 960;
 
   if (!menuToggle || !mobileNav) return;
 
@@ -77,7 +78,10 @@ function initMobileNav() {
   });
 
   const closeMenuOnDesktop = () => {
-    if (window.innerWidth > 820 && mobileNav.classList.contains("open")) {
+    if (
+      window.innerWidth > mobileNavBreakpoint &&
+      mobileNav.classList.contains("open")
+    ) {
       mobileNav.classList.remove("open");
       menuToggle.setAttribute("aria-expanded", "false");
       menuToggle.setAttribute("aria-label", "Open menu");

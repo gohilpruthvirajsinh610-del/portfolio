@@ -335,6 +335,71 @@ button {
   }
 }
 
+/* Section-specific fixes for the full navigation and narrow content areas. */
+@media (max-width: 960px) {
+  .nav-links {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .about-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-grid,
+  .contact-grid {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .terminal-header {
+    padding: 0.7rem 0.85rem;
+  }
+
+  .terminal-title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .github-header .btn {
+    width: 100%;
+  }
+
+  .github-placeholder {
+    overflow: hidden;
+  }
+
+  .contrib-grid {
+    margin-inline: -0.25rem;
+    padding-inline: 0.25rem;
+  }
+
+  .contact-item {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .contact-item span {
+    flex: 1 1 calc(100% - 2rem);
+  }
+
+  .copy-btn {
+    margin-left: 1.9rem;
+  }
+}
+
 @media (max-width: 340px) {
   html {
     font-size: 15px;

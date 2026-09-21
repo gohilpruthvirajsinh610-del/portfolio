@@ -11,21 +11,20 @@ const app = express();
 connectDB();
 
 app.use(cors({
-    origin: "https://portfolio-seven-ashen-ii8hl87wjh.vercel.app",
+    origin: "https://portfolio-seven-ashen-ii8hl87wj.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
 app.use(express.json());
+
 app.use("/api/contact", contactRoutes);
+
 app.get("/", (req, res) => {
-  res.json({
-    success: true,
-    message: "Portfolio API is running",
-  });
+    res.json({
+        success: true,
+        message: "Portfolio API is running"
+    });
 });
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+module.exports = app;
